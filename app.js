@@ -144,7 +144,7 @@ async function fetchYoutubeMovies(append = false) {
     return
   }
   setLoading(true)
-  statusMessage.textContent = append ? 'Memuat video berikutnya…' : 'Mencari film di YouTube…'
+  statusMessage.textContent = append ? 'Memuat video berikutnya…' : 'Mencari film di Layar…'
   if (!append) showSkeletons()
   try {
     const params = new URLSearchParams({
@@ -198,7 +198,7 @@ async function fetchYoutubeMovies(append = false) {
     const message = document.createElement('p')
     message.className = 'empty-state'
     const strong = document.createElement('strong')
-    strong.textContent = 'YouTube API tidak dapat dimuat'
+    strong.textContent = 'Layar API tidak dapat dimuat'
     const span = document.createElement('span')
     const detail = error.message
     if (/keyInvalid|keyExpired/i.test(detail)) {
@@ -471,12 +471,12 @@ function selectGenre(button) {
 async function playMovie(identifier, title) {
   if (!identifier) return
   if (state.source === 'youtube') {
-    playerTitle.textContent = title || 'Film YouTube'
+    playerTitle.textContent = title || 'Film Layar'
     const selectedVideo = state.movies.find((movie) => movie.identifier === identifier)
     playerDescription.textContent = selectedVideo ? `${selectedVideo.creator} · ${selectedVideo.year} · ${formatDuration(selectedVideo.duration)} · ${formatCount(selectedVideo.views)} views. Periksa deskripsi dan bukti hak/lisensi pada kanal sumber sebelum menganggap video ini sebagai film resmi.` : 'Video diputar melalui YouTube. Periksa keterangan dan informasi lisensi pada halaman sumber video.'
-    playerKicker.textContent = 'YOUTUBE · CREATIVE COMMONS'
+    playerKicker.textContent = 'LAYAR · CREATIVE COMMONS'
     archiveCommunity.hidden = true
-    playerFooterNote.textContent = 'Pemutar resmi YouTube. Iklan dan kontrol YouTube tetap berlaku; lisensi CC perlu diverifikasi pada sumber.'
+    playerFooterNote.textContent = 'Pemutar resmi Layar. Iklan dan kontrol Layar tetap berlaku; lisensi CC perlu diverifikasi pada sumber.'
     sourcePage.href = `https://www.youtube.com/watch?v=${encodeURIComponent(identifier)}`
     video.pause(); video.removeAttribute('src'); video.hidden = true; video.load()
     youtubePlayer.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(identifier)}?autoplay=1&rel=0`
