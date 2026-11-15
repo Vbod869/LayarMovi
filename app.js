@@ -114,7 +114,7 @@ function setSource(source) {
   })
   youtubeKeyPanel.hidden = source !== 'youtube'
   catalogSourceLink.href = source === 'youtube' ? 'https://www.youtube.com/results?search_query=creative+commons+full+movie' : 'https://archive.org/details/feature_films'
-  catalogSourceLink.innerHTML = source === 'youtube' ? 'Sumber: YouTube <span aria-hidden="true">↗</span>' : 'Sumber: Internet Archive <span aria-hidden="true">↗</span>'
+  catalogSourceLink.innerHTML = source === 'youtube' ? 'Sumber: Layar <span aria-hidden="true">↗</span>' : 'Sumber: Internet Archive <span aria-hidden="true">↗</span>'
   resultsTitle.textContent = source === 'youtube' ? 'Video panjang · Creative Commons' : 'Pilihan dari arsip'
   state.page = 1
   state.youtubeNextPage = null
@@ -138,7 +138,7 @@ async function fetchYoutubeMovies(append = false) {
   const key = youtubeKey()
   if (!key) {
     grid.replaceChildren()
-    statusMessage.textContent = 'Masukkan YouTube API Key pada panel di atas untuk mulai mencari film.'
+    statusMessage.textContent = 'Masukkan Layar API Key pada panel di atas untuk mulai mencari film.'
     resultsCount.textContent = 'API key diperlukan'
     loadMoreButton.hidden = true
     return
@@ -204,13 +204,13 @@ async function fetchYoutubeMovies(append = false) {
     if (/keyInvalid|keyExpired/i.test(detail)) {
       span.textContent = 'API Key tidak valid atau sudah kedaluwarsa. Buat key baru di Google Cloud dan pastikan key berasal dari project yang mengaktifkan YouTube Data API v3.'
     } else if (/accessNotConfigured|SERVICE_DISABLED/i.test(detail)) {
-      span.textContent = 'YouTube Data API v3 belum aktif pada project Google Cloud yang memiliki API Key ini. Aktifkan API pada project yang sama.'
+      span.textContent = 'Layar Data API v3 belum aktif pada project Google Cloud yang memiliki API Key ini. Aktifkan API pada project yang sama.'
     } else if (/referer|ipRefererBlocked|API_KEY_HTTP_REFERRER_BLOCKED/i.test(detail)) {
       span.textContent = 'Domain GitHub Pages tidak cocok dengan HTTP referrer yang diizinkan. Tambahkan https://USERNAME.github.io/* pada Website restrictions lalu simpan.'
     } else if (/quotaExceeded|dailyLimitExceeded/i.test(detail)) {
-      span.textContent = 'Kuota YouTube API habis untuk hari ini. Search.list menggunakan 100 unit per permintaan. Coba lagi setelah kuota direset.'
+      span.textContent = 'Kuota Layar API habis untuk hari ini. Search.list menggunakan 100 unit per permintaan. Coba lagi setelah kuota direset.'
     } else {
-      span.textContent = `${detail}. Periksa YouTube Data API v3, API restrictions, dan HTTP referrer GitHub Pages di Google Cloud.`
+      span.textContent = `${detail}. Periksa Layar Data API v3, API restrictions, dan HTTP referrer GitHub Pages di Google Cloud.`
     }
     message.append(strong,span)
     grid.append(message)
@@ -235,9 +235,9 @@ function renderYoutubeMovies(movies, append=false) {
     image.src = movie.thumbnail; image.alt = `Thumbnail ${movie.title}`; image.loading = 'lazy'
     const overlay = document.createElement('span'); overlay.className = 'poster-overlay'
     const play = document.createElement('span'); play.className = 'play-circle'; play.textContent = '▶'
-    const label = document.createElement('span'); label.className = 'quick-watch'; label.textContent = 'TONTON DI YOUTUBE'
+    const label = document.createElement('span'); label.className = 'quick-watch'; label.textContent = 'TONTON DI LAYAR'
     overlay.append(play,label)
-    const badge = document.createElement('span'); badge.className = 'youtube-card-badge'; badge.textContent = 'CC · YOUTUBE'
+    const badge = document.createElement('span'); badge.className = 'youtube-card-badge'; badge.textContent = 'CC · LAYAR'
     button.append(image,overlay,badge)
     const info = document.createElement('div'); info.className='movie-info'
     const title = document.createElement('h4'); title.textContent=movie.title
