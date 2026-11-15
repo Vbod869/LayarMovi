@@ -202,11 +202,11 @@ async function fetchYoutubeMovies(append = false) {
     const span = document.createElement('span')
     const detail = error.message
     if (/keyInvalid|keyExpired/i.test(detail)) {
-      span.textContent = 'API Key tidak valid atau sudah kedaluwarsa. Buat key baru di Google Cloud dan pastikan key berasal dari project yang mengaktifkan YouTube Data API v3.'
+      span.textContent = 'API Key tidak valid atau sudah kedaluwarsa.'
     } else if (/accessNotConfigured|SERVICE_DISABLED/i.test(detail)) {
-      span.textContent = 'Layar Data API v3 belum aktif pada project Google Cloud yang memiliki API Key ini. Aktifkan API pada project yang sama.'
+      span.textContent = 'Layar Data API v3 belum aktif. Aktifkan API pada project yang sama.'
     } else if (/referer|ipRefererBlocked|API_KEY_HTTP_REFERRER_BLOCKED/i.test(detail)) {
-      span.textContent = 'Domain GitHub Pages tidak cocok dengan HTTP referrer yang diizinkan. Tambahkan https://USERNAME.github.io/* pada Website restrictions lalu simpan.'
+      span.textContent = 'Domain GitHub Pages tidak cocok dengan HTTP referrer yang diizinkan.'
     } else if (/quotaExceeded|dailyLimitExceeded/i.test(detail)) {
       span.textContent = 'Kuota Layar API habis untuk hari ini. Search.list menggunakan 100 unit per permintaan. Coba lagi setelah kuota direset.'
     } else {
@@ -214,7 +214,7 @@ async function fetchYoutubeMovies(append = false) {
     }
     message.append(strong,span)
     grid.append(message)
-    statusMessage.textContent = 'Periksa API key, pembatasan domain, dan status YouTube Data API v3 di Google Cloud.'
+    statusMessage.textContent = 'Periksa API key, pembatasan domain, dan status Layar Data API v3.'
     resultsCount.textContent = 'Gagal memuat'
     loadMoreButton.hidden = true
   } finally { setLoading(false) }
